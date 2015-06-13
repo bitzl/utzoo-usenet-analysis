@@ -1,0 +1,22 @@
+Amhtsa.157
+net.games
+utzoo!decvax!harpo!eagle!mhtsa!rick
+Wed May  5 22:33:48 1982
+Re: Raster vs. Vector
+In reply to ...minn-ua!kirk I would take issue with points 1 and 3.
+1) No three-color, full spectrum, commercial color vector display exists.
+
+A couple of years ago at NCC '78 I can remember seeing an Evans&Sutherland
+demo showing an excellent, RGB vector display. I understand that the
+technique employed three guns and phosphor triads. The convergence
+problems must have been tremendous, but in the carnival atmosphere of an
+NCC it looked damned good.
+
+3) A good raster tube, at a resolution of 1Kx1K, can display lines that
+   are indistinguishable from a true vector for all intents and purposes.
+
+Typical pixel-equivalent resolutions for vector displays are 4Kx4K and
+produce noticably smoother random lines than any 1Kx1K raster system,
+and given that the lines are actually "drawn" by the electron gun, any
+stair-step effect is purely the effect of the shadow mask/phosphor
+combination.
