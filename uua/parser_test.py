@@ -11,7 +11,6 @@ First line of message body.
 
 Here is some text
 which may span multiple lines.
-
 """
 
 
@@ -32,13 +31,16 @@ class FirstFileFormatParserTest(TestCase):
 			self.parser.parse(line)
 
 		post = self.parser.get_post()
-		self.assertEquals(post.message_id, 'Acbosg.129')
-		self.assertEquals(post.newsgroup, 'Acbosg.129')
-		self.assertEquals(post.path, 'Acbosg.129')
-		self.assertEquals(post.timestamp, 'Acbosg.129')
-		self.assertEquals(post.subject, 'Acbosg.129')
-		self.assertEquals(post.content, 'Acbosg.129')
+		self.assertEquals(post['message_id'], 'Acbosg.129')
+		self.assertEquals(post['newsgroup'], 'net.general')
+		self.assertEquals(post['path'], 'utzoo!decvax!duke!mhtsa!harpo!cbosg!mark')
+		self.assertEquals(post['timestamp'], 'Thu Aug 27 08:28:10 1981')
+		self.assertEquals(post['subject'], 'Re: UUCP gateway')
+		self.assertEquals(post['body'], """First line of message body.
 
+Here is some text
+which may span multiple lines.
+""")
 
 if __name__ == '__main__':
 	main()
