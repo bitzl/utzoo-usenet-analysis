@@ -16,7 +16,7 @@ class FirstFileFormatParser(Parser):
     accept_pattern = re.compile('\\w+\\.\\d+')
 
     def __init__(self):
-        self.post = {}
+        self.post = { 'body': '' }
         self.line_number = 0
         self.keys = [
             'message_id',
@@ -25,7 +25,6 @@ class FirstFileFormatParser(Parser):
             'timestamp',
             'subject'
         ]
-        self.reset()
 
     @classmethod
     def accept(cls, first_line):
@@ -41,12 +40,7 @@ class FirstFileFormatParser(Parser):
     def get_post(self):
         post = self.post
         post['body'] = post['body'][:-1]
-        self.reset()
         return post
-
-    def reset(self):
-        self.line_number = 0
-        self.post = { 'body': '' }
 
     def parse_header(self, line):
         key = self.keys[self.line_number]
