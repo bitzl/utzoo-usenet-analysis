@@ -11,6 +11,10 @@ class Parser:
     def get_post(self):
         raise NotImplementedError()
 
+    def parse_lines(self, lines):
+        for line in lines:
+            self.parse(line)
+
 
 class FirstFileFormatParser(Parser):
     accept_pattern = re.compile('\\w+\\.\\d+')
@@ -45,6 +49,40 @@ class FirstFileFormatParser(Parser):
     def parse_header(self, line):
         key = self.keys[self.line_number]
         self.post[key] = line
+
+    def parse_body(self, line):
+        self.post['body'] = self.post['body'] + line + '\n'
+
+
+class SecondFileFormatParser(Parser):
+
+    def __init__(self):
+        self.post = { 'body': '' }
+        self.new_line_count = 0
+
+    @classmethod
+    def accept(cls, first_line):
+        return first_line.startswith('Path: ')
+
+    def parse(self, line):
+        if self.new_line_count < 3:
+            if line == '':
+                self.new_line_count += 1
+            else:
+                self.parse_header(line)
+        else:
+            self.parse_body(line)
+
+    def get_post(self):
+        post = self.post
+        post['body'] = post['body'][:-1]
+        return post
+
+    def parse_header(self, line):
+        key, value = line.split(': ', 1)
+        key = key.replace('-', '_')
+        key = key.replace('Date', 'timestamp')
+        self.post[key.lower()] = value
 
     def parse_body(self, line):
         self.post['body'] = self.post['body'] + line + '\n'
